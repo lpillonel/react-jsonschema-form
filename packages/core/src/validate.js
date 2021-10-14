@@ -83,17 +83,19 @@ function toErrorSchema(errors) {
 export function toErrorList(errorSchema, fieldName = "root") {
   // XXX: We should transform fieldName as a full field path string.
   let errorList = [];
-  if ("__errors" in errorSchema) {
-    errorList = errorList.concat(
-      errorSchema.__errors.map(stack => {
-        return {
-          stack: `${fieldName}: ${stack}`,
-        };
-      })
-    );
-  }
+
   return Object.keys(errorSchema).reduce((acc, key) => {
-    if (key !== "__errors") {
+    // When this is an array, it means it is __errors (or similar)
+    if (Array.isArray(errorSchema[key])) {
+      errorList = errorList.concat(
+        errorSchema[key].map(stack => {
+          return {
+            stack: `${fieldName}: ${stack}`,
+          };
+        })
+      );
+      // When it's an object, it is a property error
+    } else if (typeof errorSchema[key] === "object") {
       acc = acc.concat(toErrorList(errorSchema[key], key));
     }
     return acc;
