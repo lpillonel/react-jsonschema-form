@@ -6,6 +6,7 @@ import FixedArrayFieldTemplate from './FixedArrayFieldTemplate';
 import NormalArrayFieldTemplate from './NormalArrayFieldTemplate';
 
 const {
+  getDefaultRegistry,
   getUiOptions,
   getWidget,
   isFilesArray,
@@ -35,7 +36,7 @@ const ArrayFieldTemplate = ({
   placeholder,
   rawErrors,
   readonly,
-  registry,
+  registry = getDefaultRegistry(),
   required,
   schema,
   title,
@@ -62,7 +63,6 @@ const ArrayFieldTemplate = ({
         options={options}
         rawErrors={rawErrors}
         readonly={readonly}
-        registry={registry}
         schema={schema}
         title={schema.title || name} // Why not props.title?
         value={formData}

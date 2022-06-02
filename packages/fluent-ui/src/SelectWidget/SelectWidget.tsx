@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Label, Dropdown, IDropdownOption } from "@fluentui/react";
 import { WidgetProps } from "@rjsf/core";
 import _pick from "lodash/pick";
@@ -59,6 +59,7 @@ const SelectWidget = ({
   readonly,
   value,
   multiple,
+  autofocus,
   onChange,
   onBlur,
   onFocus,

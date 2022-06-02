@@ -25,7 +25,6 @@ const FieldTemplate = ({
   rawErrors,
   rawHelp,
   readonly,
-  registry,
   required,
   schema,
   // uiSchema,

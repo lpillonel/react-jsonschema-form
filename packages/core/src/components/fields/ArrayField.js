@@ -16,6 +16,7 @@ import {
   optionsList,
   retrieveSchema,
   toIdSchema,
+  getDefaultRegistry,
 } from "../../utils";
 import { nanoid } from "nanoid";
 
@@ -271,7 +272,7 @@ class ArrayField extends Component {
   }
 
   _getNewFormDataRow = () => {
-    const { schema, registry } = this.props;
+    const { schema, registry = getDefaultRegistry() } = this.props;
     const { rootSchema } = registry;
     let itemSchema = schema.items;
     if (isFixedItems(schema) && allowAdditionalItems(schema)) {
@@ -423,7 +424,12 @@ class ArrayField extends Component {
   };
 
   render() {
-    const { schema, uiSchema, idSchema, registry } = this.props;
+    const {
+      schema,
+      uiSchema,
+      idSchema,
+      registry = getDefaultRegistry(),
+    } = this.props;
     const { rootSchema } = registry;
     if (!schema.hasOwnProperty("items")) {
       const { fields } = registry;
@@ -465,7 +471,7 @@ class ArrayField extends Component {
       readonly,
       hideError,
       autofocus,
-      registry,
+      registry = getDefaultRegistry(),
       onBlur,
       onFocus,
       idPrefix,
@@ -547,7 +553,7 @@ class ArrayField extends Component {
       onBlur,
       onFocus,
       formData: items,
-      registry,
+      registry = getDefaultRegistry(),
       rawErrors,
       name,
     } = this.props;
@@ -596,7 +602,7 @@ class ArrayField extends Component {
       autofocus,
       onBlur,
       onFocus,
-      registry,
+      registry = getDefaultRegistry(),
       rawErrors,
       name,
     } = this.props;
@@ -645,7 +651,7 @@ class ArrayField extends Component {
       autofocus,
       onBlur,
       onFocus,
-      registry,
+      registry = getDefaultRegistry(),
       rawErrors,
     } = this.props;
     const title = schema.title || name;
@@ -667,7 +673,6 @@ class ArrayField extends Component {
         value={items}
         disabled={disabled}
         readonly={readonly}
-        registry={registry}
         formContext={formContext}
         autofocus={autofocus}
         rawErrors={rawErrors}
@@ -689,7 +694,7 @@ class ArrayField extends Component {
       disabled,
       readonly,
       autofocus,
-      registry,
+      registry = getDefaultRegistry(),
       onBlur,
       onFocus,
       rawErrors,
@@ -759,7 +764,6 @@ class ArrayField extends Component {
       onAddClick: this.onAddClick,
       readonly,
       required,
-      registry,
       schema,
       uiSchema,
       title,
@@ -793,7 +797,12 @@ class ArrayField extends Component {
       onFocus,
       rawErrors,
     } = props;
-    const { disabled, readonly, uiSchema, registry } = this.props;
+    const {
+      disabled,
+      readonly,
+      uiSchema,
+      registry = getDefaultRegistry(),
+    } = this.props;
     const {
       fields: { SchemaField },
     } = registry;

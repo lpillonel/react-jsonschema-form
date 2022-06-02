@@ -13,14 +13,12 @@ type IconButtonProps = FuiIconButtonProps & {
   icon: string;
 };
 
-export default (props: IconButtonProps) => {
-  const iconProps: IIconProps = {
-    iconName: mappings[props.icon]
-  }
-  
- return <IconButton
+export default (props: IconButtonProps) => (
+ <IconButton
     disabled={props.disabled}
     onClick={e => props.onClick(e as any)}
-    iconProps={iconProps}
+    iconProps={{
+      iconName: mappings[props.icon]
+    }}
     color="secondary" />
-}
+);

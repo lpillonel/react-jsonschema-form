@@ -8,6 +8,7 @@ import {
   isSelect,
   retrieveSchema,
   toIdSchema,
+  getDefaultRegistry,
   mergeObjects,
   deepEquals,
   getSchemaType,
@@ -242,7 +243,7 @@ function SchemaFieldRender(props) {
     onKeyChange,
     onDropPropertyClick,
     required,
-    registry,
+    registry = getDefaultRegistry(),
     wasPropertyKeyModified = false,
   } = props;
   const { rootSchema, fields, formContext } = registry;

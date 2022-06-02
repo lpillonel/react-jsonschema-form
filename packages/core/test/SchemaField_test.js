@@ -7,7 +7,7 @@ import TitleField from "../src/components/fields/TitleField";
 import DescriptionField from "../src/components/fields/DescriptionField";
 
 import { createFormComponent, createSandbox } from "./test_utils";
-import { getDefaultRegistry } from "../src/defaultRegistry";
+import { getDefaultRegistry } from "../src/utils";
 
 describe("SchemaField", () => {
   let sandbox;

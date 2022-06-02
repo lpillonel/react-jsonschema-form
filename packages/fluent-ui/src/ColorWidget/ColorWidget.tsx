@@ -3,11 +3,13 @@ import {
   ColorPicker,
   IColorPickerProps,
   IColor,
+  IColorPickerStyles,
   getColorFromString,
   Label,
 } from "@fluentui/react";
 import { WidgetProps } from "@rjsf/core";
 import _pick from "lodash/pick";
+import { useConstCallback } from "@uifabric/react-hooks";
 
 const styles_red = {
   // TODO: get this color from theme.
@@ -17,7 +19,8 @@ const styles_red = {
   fontFamily: `"Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;`,
 };
 
-const allowedProps: (keyof IColorPickerProps)[] = [
+// Keys of IColorPickerProps from @fluentui/react
+const allowedProps = [
   "componentRef",
   "color",
   "strings",
@@ -36,14 +39,21 @@ const allowedProps: (keyof IColorPickerProps)[] = [
 ];
 
 const ColorWidget = ({
+  id,
   schema,
   options,
   value,
   required,
+  disabled,
+  readonly,
   label,
   onChange,
+  onBlur,
+  onFocus,
 }: WidgetProps) => {
-  const updateColor = (_ev: any, colorObj: IColor) => {
+  const { enumOptions, enumDisabled } = options;
+
+  const updateColor = (ev: any, colorObj: IColor) => {
     onChange(colorObj.hex);
   };
 

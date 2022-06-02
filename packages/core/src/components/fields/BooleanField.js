@@ -1,7 +1,12 @@
 import React from "react";
 import * as types from "../../types";
 
-import { getWidget, getUiOptions, optionsList } from "../../utils";
+import {
+  getWidget,
+  getUiOptions,
+  optionsList,
+  getDefaultRegistry,
+} from "../../utils";
 
 function BooleanField(props) {
   const {
@@ -10,7 +15,7 @@ function BooleanField(props) {
     uiSchema,
     idSchema,
     formData,
-    registry,
+    registry = getDefaultRegistry(),
     required,
     disabled,
     readonly,

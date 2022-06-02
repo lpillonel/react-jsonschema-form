@@ -152,7 +152,6 @@ class AnyOfField extends Component {
             onFocus={onFocus}
             value={selectedOption}
             options={{ enumOptions }}
-            registry={registry}
             {...uiOptions}
           />
         </div>

@@ -6,6 +6,7 @@ import {
   getUiOptions,
   isSelect,
   optionsList,
+  getDefaultRegistry,
   hasWidget,
 } from "../../utils";
 
@@ -23,7 +24,7 @@ function StringField(props) {
     onChange,
     onBlur,
     onFocus,
-    registry,
+    registry = getDefaultRegistry(),
     rawErrors,
   } = props;
   const { title, format } = schema;

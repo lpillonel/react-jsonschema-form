@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import _pick from "lodash/pick";
 import _get from "lodash/get";
 import _isEmpty from "lodash/isEmpty";
-import { getDefaultRegistry } from "../defaultRegistry";
 
 import { default as DefaultErrorList } from "./ErrorList";
 import {
@@ -11,6 +10,7 @@ import {
   retrieveSchema,
   shouldRender,
   toIdSchema,
+  getDefaultRegistry,
   deepEquals,
   toPathSchema,
   isObject,
