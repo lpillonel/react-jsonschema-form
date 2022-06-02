@@ -305,19 +305,24 @@ export function withIdRefPrefix(schemaNode) {
  * false otherwise. If the schema is invalid, then this function will return
  * false.
  */
+const validators = new Map();
+
 export function isValid(schema, data, rootSchema) {
+  let validator = validators.get(rootSchema);
+
+  if (!validator) {
+    validator = createAjvInstance().addSchema(rootSchema, ROOT_SCHEMA_PREFIX);
+
+    validators.set(rootSchema, validator);
+  }
+
   try {
     // add the rootSchema ROOT_SCHEMA_PREFIX as id.
     // then rewrite the schema ref's to point to the rootSchema
     // this accounts for the case where schema have references to models
     // that lives in the rootSchema but not in the schema in question.
-    return ajv
-      .addSchema(rootSchema, ROOT_SCHEMA_PREFIX)
-      .validate(withIdRefPrefix(schema), data);
+    return validator.validate(withIdRefPrefix(schema), data);
   } catch (e) {
     return false;
-  } finally {
-    // make sure we remove the rootSchema from the global ajv instance
-    ajv.removeSchema(ROOT_SCHEMA_PREFIX);
   }
 }
